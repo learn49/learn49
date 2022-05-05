@@ -1,0 +1,8 @@
+node_modules
+coverage
+dist
+dev
+style/output.css
+lib
+.env
+storybook-static

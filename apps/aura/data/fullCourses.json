@@ -1,0 +1,124 @@
+{
+  "78de96e5-1146-41d7-a462-a2097fe26bee": {
+    "id": "78de96e5-1146-41d7-a462-a2097fe26bee",
+    "version": "8bc118b0-a124-4d83-b26f-9582fa6c7c88",
+    "image": "/courses/FSM_branco.png",
+    "title": "Fullstack Master",
+    "subTitle": "Entregue aplicações web profissionais com autonomia e destrave a sua carreira para salários acima de 10 mil reais.",
+    "description": "Já se imaginou trabalhando em grandes projetos para empresas nacionais e estrangeiras, sendo muito bem remunerado e ainda tendo mais liberdade na carreira? A realização desse sonho pode estar mais perto do que você imagina."
+  },
+  "7945dbab-8ed7-4a26-9145-6b7f0b73327d": {
+    "id": "7945dbab-8ed7-4a26-9145-6b7f0b73327d",
+    "version": "5dbe4c13-0dc1-47c3-9eaf-d022f0e44fa9",
+    "image": "/courses/logo_devreact_branco.png",
+    "title": "DevReact",
+    "subTitle": "Domine a tecnologia que está fazendo desenvolvedores dobrarem seus salários",
+    "description": "No DevReactJS, você vai do zero à entrega aplicações profissionais em React. Você aprenderá na prática, de forma descomplicada, e estará apto para disputar as melhores vagas de emprego nas diversas empresas nacionais e estrangeiras que utilizam ReactJS em seus projetos."
+  },
+  "6e334eb5-6b1f-4830-9329-c5efa2255692": {
+    "id": "6e334eb5-6b1f-4830-9329-c5efa2255692",
+    "version": "7592308d-bbf6-4d33-92b9-636eb4958174",
+    "image": "/courses/powersites.png",
+    "title": "PowerSites",
+    "subTitle": "Crie sites até 10 vezes mais rápidos e 5 vezes mais lucrativos",
+    "description": "O PowerSites é um treinamento Premium que vai te ajudar a faturar na internet com um modelo de negócio simples e recorrente. Você terá tudo que precisa para entregar sites que performam e geram resultados positivos para seus futuros clientes."
+  },
+  "f65e97b1-dab7-4f29-8588-7169dab71ba6": {
+    "id": "f65e97b1-dab7-4f29-8588-7169dab71ba6",
+    "version": "8070819c-9895-4382-8144-6fe19b570cda",
+    "image": "/courses/context.png",
+    "title": "ContextAPI em React",
+    "description": "Não entendo ContextAPI! Afinal, por onde começo? Existe no React Native? Posso usar ContextAPI dentro de outro? Quais os benefícios de usar? Aprenda a importância deste recurso em uma aula incrível, com exemplos reais e práticos. Entenda o funcionamento, organização e a implementação da funcionalidade com códigos diretos e explicações detalhadas."
+  },
+  "a3137083-ef14-4672-9dbb-b1872879b890": {
+    "id": "a3137083-ef14-4672-9dbb-b1872879b890",
+    "version": "0b89fe8b-dba3-4296-87f1-244e0a276592",
+    "image": "/courses/forms.png",
+    "title": "Formulários em React",
+    "description": "Qual a diferença de formulários controlados e não controlados? como usar cada um deles? Além disso, aprenda a utilizar os populares Formik e React-hook-forms; aplicando tambem Validações e relacionados."
+  },
+  "5c550fe9-e971-4390-904d-e202d7fbe1f6": {
+    "id": "5c550fe9-e971-4390-904d-e202d7fbe1f6",
+    "version": "3b6d5d0b-0fb5-4e87-8bd6-556392630649",
+    "image": "/courses/hooks.png",
+    "title": "Tudo sobre React Hooks",
+    "description": "O que é e como funciona os famosos Hooks do React? Aprenda os conceitos e as regras que regem a construção; como criar hooks personalizados e muitas outras dúvidas esclarecidas em um conteúdo completo. Aqui você verá explicações detalhadas sobre como funcionam cada um dos hooks useState, useEffect, useCallBack, useMemo, useRef e também o Swr!"
+  },
+  "a1127bf8-cbf4-435b-b2f4-68471b3cd262": {
+    "id": "a1127bf8-cbf4-435b-b2f4-68471b3cd262",
+    "version": "0227f2ad-2f42-479b-9755-999d8c392a1a",
+    "image": "/courses/framework.png",
+    "title": "Tudo sobre NextJS",
+    "description": "Entenda o que é e como o NextJS é capaz de criar Rotas estáticas, Server Side Rendering (SSR), Server Side Generation (SSG) e Incremental Static Regeneration (ISR). Saiba como aplicar Revalidate, motivos de usar o \"Link\", observando segurança e privacidade dos dados e a utilização da API."
+  },
+  "9c19b9ea-e12a-48e9-960b-511523e2612f": {
+    "id": "9c19b9ea-e12a-48e9-960b-511523e2612f",
+    "version": "18e0a1d5-c3a9-4d28-87d1-332ff3b1e6e7",
+    "image": "/courses/continuous.png",
+    "title": "CI/CD: Continuous Integration / Continuous Deployment",
+    "description": "Como adicionar ainda mais qualidade ao seu projeto com processo de integração contínua e entrega contínua."
+  },
+  "7333ef25-b2ba-4ff2-9a69-7c68f1a091ec": {
+    "id": "7333ef25-b2ba-4ff2-9a69-7c68f1a091ec",
+    "version": "268d1cdd-1467-4f57-89a9-5957a5eba39d",
+    "image": "/courses/adwords.png",
+    "title": "Criando anúncios no Google Ads",
+    "description": "Como criar e administrar campanhas na rede de pesquisa do Google Ads para sites."
+  },
+  "a334fa88-2dff-4f9e-8946-a60d2d05a71f": {
+    "id": "a334fa88-2dff-4f9e-8946-a60d2d05a71f",
+    "version": "98fb5148-2d27-437f-acd6-246c7a1ff394",
+    "image": "/courses/google.png",
+    "title": "Google Meu Negócio",
+    "description": "Aprenda a criar e gerenciar o 'Google Meu Negócio'"
+  },
+  "8a3c0bfa-8e1b-4a12-8b95-91b92763ea08": {
+    "id": "8a3c0bfa-8e1b-4a12-8b95-91b92763ea08",
+    "version": "f846b8ac-4d4e-4527-a398-8d8a96d3fdda",
+    "image": "/courses/contract.png",
+    "title": "Contratos de Sites",
+    "description": "Como formalizar de forma correta a sua prestação de serviços. Inclusive, iremos fornecer o contrato que eu utilizava e todos os porquês que ele contém."
+  },
+  "891fe854-1f0f-4854-b7d3-f3746a92585a": {
+    "id": "891fe854-1f0f-4854-b7d3-f3746a92585a",
+    "version": "df48b6d6-efcb-4e62-82d6-0611c73e58cb",
+    "image": "/courses/dns.png",
+    "title": "Dominando Domínios e DNS para sites",
+    "description": "Você conhecerá tudo sobre domínios e DNS para sites. Como configurar, cuidados e para que serve cada tipo de registro no DNS."
+  },
+  "891fe854-1f0f-4854-b7d3-f3746a925851": {
+    "id": "891fe854-1f0f-4854-b7d3-f3746a92585a",
+    "version": "df48b6d6-efcb-4e62-82d6-0611c73e58cb",
+    "image": "/courses/dns.png",
+    "title": "Dominando Domínios e DNS para sites",
+    "description": "Você conhecerá tudo sobre domínios e DNS para sites. Como configurar, cuidados e para que serve cada tipo de registro no DNS."
+  },
+  "1bfc1906-04a0-4ee5-8667-cbaef3b5c1ad": {
+    "id": "1bfc1906-04a0-4ee5-8667-cbaef3b5c1ad",
+    "version": "ece72391-a293-4d4d-8277-c8054bf7b463",
+    "image": "/courses/agendaLa.png",
+    "title": "AgendaLá",
+    "description": "Entenda e aplique a estratégia de provas de conceito e transforme em código prático no projeto AgendaLá utilizando NextJS, API Routes e SWR para consumir dados da api do Notion!"
+  },
+  "cefecb39-af95-41f6-9585-8b05b93bee9a": {
+    "id": "cefecb39-af95-41f6-9585-8b05b93bee9a",
+    "version": "6c7ba813-aef2-4eeb-91c8-d0ed7f3ab761",
+    "image": "/courses/BlogDocMDX.png",
+    "title": "Blog e Documentação com MDX",
+    "description": "Crie um blog ou a documentação do seu software ou da sua integração com markdown + componentes em React."
+  },
+  "51257ad0-2e20-4adf-b847-c8acbddfe5d7": {
+    "id": "51257ad0-2e20-4adf-b847-c8acbddfe5d7",
+    "version": "43327a2f-be15-4152-aa85-58b4d90d2e28",
+    "image": "/courses/AplicandoTestescomNestJs.png",
+    "title": "[Bônus] Aplicando Testes com NestJs",
+    "description": "Veja como aplicar testes no famoso framework NestJS, utilizando Jest."
+  },
+  "0a212c27-b2fc-4d4f-9ea0-a411540b2221": {
+    "id": "0a212c27-b2fc-4d4f-9ea0-a411540b2221",
+    "version": "fd5ad5da-fbd1-437c-b013-3a34b43f18cc",
+    "image": "/courses/SaasEMultiTenancy.png",
+    "title": "[Bônus] SaaS e Multi-Tenancy",
+    "description": "O que é Software as a Service (SaaS) e como funciona o modelo Multi-Tenancy?"
+  }
+}
