@@ -7,9 +7,9 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useMutation } from 'urql'
 import { useRouter } from 'next/router'
-
 import { AccountContext } from '@/context/AccountContext'
 import Head from '@/elements/Head'
+import { GetStaticProps } from 'next'
 
 interface FormValues {
   email: string
@@ -169,6 +169,42 @@ const Login = () => {
       </div>
     </>
   )
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const req = await fetch(process.env.NEXT_PUBLIC_API, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      query: `
+    query getAccountSettingsByDomain($domain: String!) {
+      account: getAccountSettingsByDomain(domain: $domain) {
+        id
+        subdomain
+        friendlyName
+        description
+        recaptchaSiteKey
+      }
+    }
+      `,
+      variables: {
+        domain: process.env.NEXT_PUBLIC_ACCOUNT
+      }
+    })
+  })
+  const { data } = await req.json()
+
+  return {
+    props: {
+      account: {
+        id: data?.account?.id,
+        subdomain: data?.account?.subdomain,
+        friendlyName: data?.account?.friendlyName
+      }
+    }
+  }
 }
 
 export default Login

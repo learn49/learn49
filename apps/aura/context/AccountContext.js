@@ -28,7 +28,7 @@ export const AccountProvider = ({ children, account = {} }) => {
     variables: {
       domain: subDomain
     },
-    pause: !subDomain
+    pause: !subDomain || account
   })
   const { data, error } = getAccount
 
@@ -44,7 +44,7 @@ export const AccountProvider = ({ children, account = {} }) => {
     }
   }, [data])
 
-  if (!data && !error) {
+  if (!data && !error && !account) {
     return <Waiting />
   }
 
