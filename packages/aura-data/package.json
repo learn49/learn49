@@ -1,9 +1,10 @@
 {
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
+    "src/graphql",
     "dist",
     "src"
   ],
@@ -34,7 +35,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "aura-data",
+  "name": "@learn49/aura-data",
   "author": "Tulio Faria",
   "module": "dist/aura-data.esm.js",
   "size-limit": [
