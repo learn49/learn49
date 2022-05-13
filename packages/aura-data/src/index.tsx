@@ -6,5 +6,3 @@ export * from './graphql/queries';
 export const Thing = () => {
   return <div>the snozzberries taste like</div>;
 };
-
-export const Hi = () => <h1>Hi!</h1>;
