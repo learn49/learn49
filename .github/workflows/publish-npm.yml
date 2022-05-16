@@ -17,7 +17,7 @@ jobs:
       - name: "Use NodeJS 14"
         uses: actions/setup-node@v2
         with:
-          node-version: "14"
+          node-version: "16"
           registry-url: "https://registry.npmjs.org"
           scope: "@learn49"
 
