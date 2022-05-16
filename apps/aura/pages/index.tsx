@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 import { AccountContext } from '@/context/AccountContext'
 import Head from '@/elements/Head'
 import { GetStaticProps } from 'next'
+import { GetAccountByDomain } from '@learn49/aura-data'
 
 interface FormValues {
   email: string
@@ -178,17 +179,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      query: `
-    query getAccountSettingsByDomain($domain: String!) {
-      account: getAccountSettingsByDomain(domain: $domain) {
-        id
-        subdomain
-        friendlyName
-        description
-        recaptchaSiteKey
-      }
-    }
-      `,
+      query: GetAccountByDomain,
       variables: {
         domain: process.env.NEXT_PUBLIC_ACCOUNT
       }

@@ -5,35 +5,40 @@ import { useQuery } from 'urql'
 import Waiting from '../components/Waiting'
 import Head from '../elements/Head'
 
-export const AccountContext = createContext()
+import {
+  GetAccountByDomain,
+  GetAccountByDomainData,
+  GetAccountByDomainVariables
+} from '@learn49/aura-data'
 
-const GET_ACCOUNT_BY_DOMAIN = `
-  query getAccountSettingsByDomain($domain: String!) {
-    account: getAccountSettingsByDomain(domain: $domain) {
-      id
-      subdomain
-      friendlyName
-      description
-      recaptchaSiteKey
-    }
-  }
-`
+interface Account {
+  id?: string
+  friendlyName?: string
+  subdomain?: string
+}
+
+export const AccountContext = createContext<Account>(null)
 
 export const AccountProvider = ({ children, account = {} }) => {
   const [currentAccount, setAccount] = useState(account)
   const [subDomain, setSubDomain] = useState()
 
-  const [getAccount] = useQuery({
-    query: GET_ACCOUNT_BY_DOMAIN,
+  const [getAccount] = useQuery<
+    GetAccountByDomainData,
+    GetAccountByDomainVariables
+  >({
+    query: GetAccountByDomain,
     variables: {
       domain: subDomain
     },
-    pause: !subDomain || account
+    pause: !subDomain || !!account
   })
+
   const { data, error } = getAccount
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      // @ts-ignore
       setSubDomain(process.env.NEXT_PUBLIC_ACCOUNT || window.location.hostname)
     }
   }, [])
@@ -61,7 +66,7 @@ export const AccountProvider = ({ children, account = {} }) => {
   }
 
   return (
-    <AccountContext.Provider value={{ ...currentAccount, setAccount }}>
+    <AccountContext.Provider value={currentAccount}>
       {children}
     </AccountContext.Provider>
   )

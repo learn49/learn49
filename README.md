@@ -1,3 +1,9 @@
+# Commitzen
+
+```shell
+git cz
+```
+
 # Turborepo starter with npm
 
 This is an official starter turborepo.

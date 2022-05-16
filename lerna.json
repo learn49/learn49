@@ -1,0 +1,14 @@
+{
+  "packages": ["packages/aura-data/"],
+  "version": "independent",
+  "command": {
+    "publish": {
+      "conventionalCommits": true,
+      "registry": "https://npm.pkg.github.com",
+      "message": "chore(release): publish"
+    },
+    "version": {
+      "message": "chore(release): release"
+    }
+  }
+}
