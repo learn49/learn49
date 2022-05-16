@@ -14,6 +14,7 @@
   "dependencies": {
     "@draft-js-plugins/editor": "^4.1.0",
     "@draft-js-plugins/video": "^4.1.1",
+    "@learn49/aura-data": "*",
     "@learn49/aura-ui": "*",
     "@tailwindcss/aspect-ratio": "^0.3.0",
     "@urql/exchange-auth": "^0.1.6",
