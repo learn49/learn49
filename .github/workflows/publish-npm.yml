@@ -28,7 +28,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: "Install dependencies"
-        run: npm install
+        run: npm ci
 
       - name: "Building"
         run: npm run build
