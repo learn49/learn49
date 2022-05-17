@@ -12,7 +12,6 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "commit": "git-cz",
-    "prepublish": "lerna run prepublish",
     "publish-canary": "npx lerna version prerelease --preid canary --force-publish",
     "publish-stable": "npx lerna version --force-publish && release"
   },
