@@ -21,7 +21,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           scope: "@learn49"
           cache-dependency-path: "**/package-lock.json"
-        run: npm ci
+      - run: npm ci
 
       - name: Ensure access
         run: npm whoami
