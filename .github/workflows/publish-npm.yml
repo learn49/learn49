@@ -21,14 +21,12 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           scope: "@learn49"
           cache-dependency-path: "**/package-lock.json"
+        run: npm ci
 
       - name: Ensure access
         run: npm whoami
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: "Install dependencies"
-        run: npm ci
 
       - name: "Building"
         run: npm run build
