@@ -13,7 +13,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "commit": "git-cz",
     "publish-canary": "npx lerna version prerelease --preid canary --force-publish",
-    "publish-stable": "npx lerna version && release"
+    "publish-stable": "npx lerna version && release --yes"
   },
   "devDependencies": {
     "commitizen": "^4.2.4",
