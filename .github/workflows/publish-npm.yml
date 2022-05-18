@@ -31,6 +31,11 @@ jobs:
       - name: "Building"
         run: npm run build
 
+      - name: Config git user
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
       - name: "Figuring out the packages versions"
         run: npm run publish-stable
 
