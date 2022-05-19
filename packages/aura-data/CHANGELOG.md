@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.4](https://github.com/learn49/learn49/compare/@learn49/aura-data@1.1.3...@learn49/aura-data@1.1.4) (2022-05-18)
+
+
+### Bug Fixes
+
+* **aura-data:** small fix ([ade01ed](https://github.com/learn49/learn49/commit/ade01ed324e3b1e294792b5b7959dbf18146baf7))
+
+
+
+
+
 ## [1.1.3](https://github.com/learn49/learn49/compare/@learn49/aura-data@1.1.2...@learn49/aura-data@1.1.3) (2022-05-18)
 
 **Note:** Version bump only for package @learn49/aura-data
