@@ -1,3 +1,19 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 0.6.1 (2022-05-19)
+
+
+### Bug Fixes
+
+* **aura-ui:** fixing typo ([e301c7e](https://github.com/estevanmaito/windmill-react-ui/commit/e301c7e115eb115c53b7d5fa7c1f0ce200f3b3d9))
+
+
+
+
+
 # [0.6.0](https://github.com/estevanmaito/windmill-react-ui/compare/0.6.0-beta.0...0.6.0) (2021-05-17)
 
 This is the last version before 1.0. It already introduces some breaking changes from 0.5.x, but if you just want some base components on top of Tailwind 2.0, this is what you're looking for.
