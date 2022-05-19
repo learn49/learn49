@@ -1,7 +1,7 @@
 import React, { SVGAttributes, useContext } from 'react'
 import classNames from 'classnames'
 import { ThemeContext } from './context/ThemeContext'
-
+/* dummy comment */
 enum AlertEnum {
   success,
   danger,
