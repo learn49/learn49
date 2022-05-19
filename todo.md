@@ -1,11 +1,11 @@
 - [x] organizar os tipos das queries (aura-data)
 - [x] padronizar mensagens de commit (commitzen)
 - [x] gerar versao no pacote baseado no commit message
-- [ ] checar se funciona com mudanca em pacotes distintos (aura-data - aura-ui)
-- [ ] cleanup unused deps
+- [x] checar se funciona com mudanca em pacotes distintos (aura-data - aura-ui)
+- [x] como publicar o aura-data e aura-ui como npm packages
+- [x] como definir o semver: commit messages - commitizen
 - [ ] linter / husky -> se o commit foi feito pelo cz
-- [ ] como publicar o aura-data e aura-ui como npm packages
-- [ ] como definir o semver: commit messages - commitizen
+- [ ] cleanup unused deps
 - [ ] limpar erros do output
 - [ ] atualizar dependencias
 
