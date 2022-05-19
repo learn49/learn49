@@ -41,6 +41,5 @@ jobs:
 
       - name: "Publish NPM Package"
         run: npx lerna exec --no-bail -- npm publish
-
-      - name: "Setup npm" # Add our registry to npm config
-        run: npm --version
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
