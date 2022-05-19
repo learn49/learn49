@@ -1,5 +1,5 @@
 {
-  "packages": ["packages/aura-data/"],
+  "packages": ["packages/aura-data/", "packages/aura-ui/"],
   "version": "independent",
   "command": {
     "publish": {
