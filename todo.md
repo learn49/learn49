@@ -4,7 +4,8 @@
 - [x] checar se funciona com mudanca em pacotes distintos (aura-data - aura-ui)
 - [x] como publicar o aura-data e aura-ui como npm packages
 - [x] como definir o semver: commit messages - commitizen
-- [ ] linter / husky -> se o commit foi feito pelo cz
+- [x] linter / husky -> se o commit foi feito pelo cz
+- [ ] update readme.md
 - [ ] cleanup unused deps
 - [ ] limpar erros do output
 - [ ] atualizar dependencias
