@@ -1,0 +1,21 @@
+FROM node:12
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+RUN npm install -g knex
+
+COPY . .
+
+RUN cp docker-entrypoint.sh /usr/local/bin/ && \
+    chmod +x /usr/local/bin/docker-entrypoint.sh
+
+EXPOSE 3000
+
+RUN npm run build
+
+CMD ["npm", "start"]
+
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]

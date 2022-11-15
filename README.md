@@ -9,10 +9,9 @@ Learn49 is the building blocks of an extraordinary learning experience. From bot
 ## Apps and Packages
 
 - `docs`: a [Docusaurus](https://docusaurus.io/) app
-- `apps/aura`: main [Next.js](https://nextjs.org) user interface (it's a multi-tenant view)
+- `apps/web`: main [Next.js](https://nextjs.org) user interface (it's a multi-tenant view)
 - `packages/aura-data`: a data library used in `aura` with GraphQL queries and mutations
 - `packages/aura-ui`: a UI library used in `aura`
-- `packages/ui`: a stub React component library shared by both `app/app-test`
 - `packages/config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `packages/tsconfig`: `tsconfig.json`s used throughout the monorepo
 

@@ -1,0 +1,42 @@
+version: '3.6'
+
+networks:
+  learn49-network:
+    driver: bridge
+
+services:
+  learn49-api:
+    build: .
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - DB_HOST=learn49-postgres
+    depends_on:
+      - learn49-postgres
+    entrypoint:
+      - /usr/local/bin/docker-entrypoint.sh
+    networks:
+      - learn49-network
+    links:
+      - learn49-postgres
+    container_name: learn49-api
+    ports:
+      - 3000:3000
+
+  learn49-postgres:
+    image: postgres
+    container_name: learn49-postgres
+    restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=no
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - /var/lib/postgresql/data
+    networks:
+      - learn49-network
+

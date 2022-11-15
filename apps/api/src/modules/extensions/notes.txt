@@ -1,0 +1,28 @@
+l49-plugins:
+-------------
+pluginName: Allow only specific domains.
+applied: PRE_USER_CREATION
+permissions: none
+whitelist: none
+author: Learn 49 (developers account)
+authorVerified: true
+settings: [
+  {
+    name: "domains",
+    label: "Allowed domains",
+    type: "string",
+    list: true,
+    minimum: 1
+  },
+  {
+    name: "errorMessage",
+    defaultValue: "We only accept new sign-ups from these specific domains: %s."
+  }
+]
+source: string
+sourceCall: (context, input, settings, { tools: { http } })
+-----
+Installation: 
+- order: int 
+- settings
+- context (account, other stuff)
