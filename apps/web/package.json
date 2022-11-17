@@ -4,7 +4,7 @@
   "description": "Plataforma Aura",
   "main": "index.js",
   "scripts": {
-    "dev": "next --port 3005",
+    "dev": "next",
     "start": "next start",
     "build": "next build"
   },

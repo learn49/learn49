@@ -6,5 +6,5 @@ export default {
   pass: process.env.DB_PASSWORD,
   db: process.env.DB_NAME,
   port: process.env.DB_PORT,
-  ssl: Boolean(process.env.DB_SSL || false)
+  //ssl: Boolean(process.env.DB_SSL || false)
 };

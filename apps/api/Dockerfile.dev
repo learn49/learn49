@@ -1,0 +1,12 @@
+FROM node:14-alpine3.15
+
+RUN apk add --no-cache git tini
+
+WORKDIR /app
+
+# no yarn here
+# deps are dynamically installed/cached at boot
+
+ENTRYPOINT ["/sbin/tini", "-g", "--"]
+
+CMD ["scripts/init-dev.sh"]

@@ -40,13 +40,13 @@ import { MediaFileModule } from './modules/media-file/media-file.module';
       database: dbConfig.db,
       port: Number(dbConfig.port),
       logging: false,
-      ssl: dbConfig.ssl,
       autoLoadEntities: true,
+      /*ssl: dbConfig.ssl,
       extra: {
         ssl: {
           rejectUnauthorized: false,
         },
-      },
+      },*/
     }),
     SendGridModule.forRoot({ apikey: sendGridConfig.apiKey }),
     ExtensionsModule,

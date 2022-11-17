@@ -17,6 +17,12 @@ Learn49 is the building blocks of an extraordinary learning experience. From bot
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
+## Starting locally:
+
+```sh
+docker-compose up proxy
+```
+
 ## Getting started
 
 This is a Turborepo powered monorepo. It relies on NPM workspaces to link dependencies.

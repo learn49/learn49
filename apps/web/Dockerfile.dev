@@ -1,0 +1,9 @@
+FROM node:14-alpine3.15
+
+RUN apk add --no-cache tini \
+    python3 build-base
+
+WORKDIR /app
+
+ENTRYPOINT ["/sbin/tini", "-g", "--"]
+CMD ["scripts/init-dev.sh"]

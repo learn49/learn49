@@ -1,0 +1,48 @@
+---
+version: "3.7"
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: learn49
+    ports:
+      - "5488:5432"
+  
+  api:
+    build:
+      context: ./apps/api/
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./apps/api:/app
+    environment:
+      PORT: 3000
+    env_file:
+      - ./apps/api/env.dev
+    depends_on:
+      - postgres
+
+  web:
+    build:
+      context: ./apps/web/
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./apps/web:/app
+    environment:
+      PORT: 3000
+    env_file:
+      - ./apps/web/env.dev
+    depends_on:
+      - api
+
+  proxy:
+    image: nginx:alpine
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    volumes:
+      - ./apps/proxy:/etc/nginx
+    depends_on:
+      - api
