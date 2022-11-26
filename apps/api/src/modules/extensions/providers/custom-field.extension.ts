@@ -117,10 +117,9 @@ export class CustomFieldExtension {
       const customFields = getEntity.metadata[extensionSlug];
 
       if (customFields) {
-        //TODO: Get first field if installationId was not provided
-        const customField = customFields.find(
-          field => field.installationId === installationId,
-        );
+        const customField = installationId
+          ? customFields.find(field => field.installationId === installationId)
+          : customFields?.[0];
 
         if (customField && customField.fields[field]) {
           return customField.fields[field];
