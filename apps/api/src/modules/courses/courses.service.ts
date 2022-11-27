@@ -2,6 +2,7 @@ import { AppExceptions } from '@/utils/AppExceptions';
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { getManager, In, Repository } from 'typeorm';
+import slugify from 'slugify';
 import { LessonProgress } from '../course-lessons/lesson-progress.entity';
 import { ICourseVersionRepository } from '../course-versions/repositories/course-version-repository.interface';
 import { Enrollment } from '../enrollment/dto/enrollment';
@@ -18,6 +19,7 @@ import {
   ProgressArgs,
   UpdateArgs,
 } from './types';
+import { Label } from '../labels/label.entity';
 
 const uuid = require('uuid');
 
@@ -81,16 +83,10 @@ export class CourseService {
   }
 
   async findOne({ accountId, courseId }: FindOneArgs) {
-    const course = await this.courseRepository.findOne({
+    return await this.courseRepository.findOne({
       id: courseId,
-      accountId: accountId,
+      accountId,
     });
-
-    if (!course) {
-      return null;
-    }
-
-    return course;
   }
 
   async findAll({ accountId, userId, limit, offset }: FindAllArgs) {
@@ -111,7 +107,7 @@ export class CourseService {
 
       const totalCount = await this.courseRepository.count(accountId);
 
-      return { courses, totalCount: totalCount };
+      return { courses, totalCount };
     }
 
     // @todo: adicionar condicional para tutor visualizar as lições
@@ -204,7 +200,7 @@ export class CourseService {
 
         const { labels } = await this.courseRepository.findOne({
           id: course.id,
-          accountId: accountId,
+          accountId,
         });
 
         return {
@@ -232,41 +228,43 @@ export class CourseService {
     image,
     videoPreview,
     defaultVersion,
+    slug,
+    duration,
+    labels,
   }: UpdateArgs) {
     const userRole = await this.userRoleRepository.findOne({
-      where: {
-        userId,
-        accountId,
-      },
+      userId,
+      accountId,
     });
-
-    if (!userRole) {
-      throw AppExceptions.UserNotFound;
-    }
-
-    if (userRole.role !== 'owner') {
+    if (!userRole) throw AppExceptions.UserNotFound;
+    if (userRole.role !== 'owner')
       throw AppExceptions.OnlyOwnerCanCreateCourses;
-    }
 
     const course = await this.courseRepository.findOne({
       id: courseId,
       accountId,
     });
-
-    if (!course) {
-      throw AppExceptions.CourseNotFound;
-    }
+    if (!course) throw AppExceptions.CourseNotFound;
 
     if (title) course.title = title;
     if (description) course.description = description;
     if (image) course.image = image;
     if (videoPreview) course.videoPreview = videoPreview;
     if (defaultVersion) course.defaultVersion = defaultVersion;
+    if (duration) course.duration = duration;
+    if (slug) course.slug = slugify(slug).toLowerCase();
+
+    if (labels) {
+      const labelsList = labels.map(({ id }) => {
+        const label = new Label();
+        label.id = id;
+        return label;
+      });
+      course.labels = labelsList;
+    }
 
     course.updatedAt = new Date();
-
     await this.courseRepository.save(course);
-
     return course;
   }
 
@@ -328,7 +326,7 @@ export class CourseService {
       totalLessons,
     ] = await this.lessonProxyRepository.findAndCount({
       where: {
-        courseId: courseId,
+        courseId,
         status: 'published',
         moduleId: In([...moduleIds]),
       },
