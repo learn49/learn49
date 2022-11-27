@@ -10,4 +10,6 @@ export type UpdateArgs = {
   videoPreview?: string;
   defaultVersion?: string;
   labels: Label[];
+  slug?: string;
+  duration?: string;
 };
