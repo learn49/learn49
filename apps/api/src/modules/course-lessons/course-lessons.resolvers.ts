@@ -51,7 +51,7 @@ export class CourseLessonResolver {
   }
 
   @UseGuards(AuthGuard)
-  @Query(() => [Lesson])
+  @Query(() => [Lesson], { name: 'getCourseLessons' })
   async getCourseLessons(
     @Args('accountId') accountId: string,
     @Args('moduleId') moduleId: string,
@@ -71,17 +71,15 @@ export class CourseLessonResolver {
     return lessons;
   }
 
-  @UseGuards(AuthGuard)
-  @Query(() => Lesson)
+  @Query(() => Lesson, { name: 'getCourseLesson' })
   async getCourseLesson(
     @Args('accountId') accountId: string,
     @Args('lessonId') lessonId: string,
   ) {
-    const lesson = await this.courseLessonService.findOne({
+    return await this.courseLessonService.findOne({
       accountId,
       lessonId,
     });
-    return lesson;
   }
 
   @UseGuards(AuthGuard)
@@ -147,15 +145,13 @@ export class CourseLessonResolver {
   }
 
   @UseGuards(AuthGuard)
-  @Mutation(() => Lesson)
+  @Mutation(() => Lesson, { name: 'editCourseLesson' })
   async editCourseLesson(
-    @Args('accountId') accountId: string,
     @Args('lessonId') lessonId: string,
     @Args('input') input: EditLessonInput,
     @Context('user') user: User,
   ) {
-    const { id: userId } = user;
-
+    const { id: userId, accountId } = user;
     return this.courseLessonService.update({
       accountId,
       lessonId,

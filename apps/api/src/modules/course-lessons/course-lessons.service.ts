@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Brackets, MoreThan, Repository } from 'typeorm';
+import slugify from 'slugify';
 import { AppExceptions } from '../../utils/AppExceptions';
 
 import { UserRole } from '../users/user-role.entity';
@@ -176,18 +177,12 @@ export class CourseLessonService {
 
   async findOne({ accountId, lessonId }: FindOneLessonArgs) {
     const lesson = await this.courseLessonRepository.findOne({
-      where: {
-        id: lessonId,
-        accountId,
-      },
+      id: lessonId,
+      accountId,
     });
-
-    if (!lesson) {
-      throw AppExceptions.LessonNotFound;
-    }
+    if (!lesson) throw AppExceptions.LessonNotFound;
 
     const blocks = lesson.blocks ? JSON.stringify(lesson.blocks) : null;
-
     return {
       ...lesson,
       blocks,
@@ -554,37 +549,27 @@ export class CourseLessonService {
     userId,
     lessonId,
     blocks,
+    slug,
     ...input
   }: UpdateArgs): Promise<CourseLesson> {
     const userRole = await this.userRoleRepository.findOne({
-      where: {
-        userId,
-        accountId,
-      },
+      userId,
+      accountId,
     });
-
-    if (userRole.role !== 'owner') {
-      throw AppExceptions.AccessDenied;
-    }
+    if (userRole.role !== 'owner') throw AppExceptions.AccessDenied;
 
     const lesson = await this.courseLessonRepository.findOne({
-      where: {
-        id: lessonId,
-        accountId,
-      },
+      id: lessonId,
+      accountId,
     });
-
-    if (!lesson) {
-      throw AppExceptions.LessonNotFound;
-    }
+    if (!lesson) throw AppExceptions.LessonNotFound;
 
     if (blocks) lesson.blocks = JSON.parse(blocks);
-
+    if (slug) lesson.slug = slugify(slug).toLowerCase();
     Object.assign(lesson, {
       ...input,
       blocks: lesson.blocks,
     });
-
     return this.courseLessonRepository.save(lesson);
   }
 
