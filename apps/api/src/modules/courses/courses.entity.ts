@@ -34,6 +34,12 @@ export class Course {
   @Column({ name: 'default_version' })
   defaultVersion: string;
 
+  @Column({ name: 'slug', nullable: true })
+  slug: string;
+
+  @Column({ name: 'duration', nullable: true })
+  duration: string;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
