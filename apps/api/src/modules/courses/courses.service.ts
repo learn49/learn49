@@ -1,8 +1,7 @@
-import { AppExceptions } from '@/utils/AppExceptions';
+import { AppExceptions, checkSlug } from '@/utils';
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { getManager, In, Repository } from 'typeorm';
-import slugify from 'slugify';
 import { LessonProgress } from '../course-lessons/lesson-progress.entity';
 import { ICourseVersionRepository } from '../course-versions/repositories/course-version-repository.interface';
 import { Enrollment } from '../enrollment/dto/enrollment';
@@ -20,12 +19,15 @@ import {
   UpdateArgs,
 } from './types';
 import { Label } from '../labels/label.entity';
+import { Course } from './courses.entity';
 
 const uuid = require('uuid');
 
 @Injectable()
 export class CourseService {
   constructor(
+    @InjectRepository(Course)
+    private readonly repository: Repository<Course>,
     @InjectRepository(UserRole)
     private readonly userRoleRepository: Repository<UserRole>,
     @Inject('COURSE_VERSION_REPOSITORY')
@@ -50,15 +52,14 @@ export class CourseService {
     versionName,
     labels,
   }: CourseArgs) {
-    const userRole = await this.userRoleRepository.findOne({
-      where: {
-        userId,
-      },
-    });
-
-    if (userRole.role !== 'owner') {
+    const userRole = await this.userRoleRepository.findOne({ userId });
+    if (userRole.role !== 'owner')
       throw AppExceptions.OnlyOwnerCanCreateCourses;
-    }
+    const slug = await checkSlug({
+      title,
+      accountId,
+      repository: this.repository,
+    });
 
     const course = await this.courseRepository.create({
       accountId,
@@ -68,6 +69,7 @@ export class CourseService {
       createdAt: new Date(),
       updatedAt: new Date(),
       labels,
+      slug,
     });
 
     await this.courseVersionRepository.create({
@@ -252,7 +254,13 @@ export class CourseService {
     if (videoPreview) course.videoPreview = videoPreview;
     if (defaultVersion) course.defaultVersion = defaultVersion;
     if (duration) course.duration = duration;
-    if (slug) course.slug = slugify(slug).toLowerCase();
+    if (slug) {
+      course.slug = await checkSlug({
+        title: slug,
+        accountId,
+        repository: this.repository,
+      });
+    }
 
     if (labels) {
       const labelsList = labels.map(({ id }) => {
