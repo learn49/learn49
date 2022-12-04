@@ -56,7 +56,7 @@ export class CourseService {
     if (userRole.role !== 'owner')
       throw AppExceptions.OnlyOwnerCanCreateCourses;
     const slug = await checkSlug({
-      title,
+      url: title,
       accountId,
       repository: this.repository,
     });
@@ -256,7 +256,7 @@ export class CourseService {
     if (duration) course.duration = duration;
     if (slug) {
       course.slug = await checkSlug({
-        title: slug,
+        url: slug,
         accountId,
         repository: this.repository,
       });

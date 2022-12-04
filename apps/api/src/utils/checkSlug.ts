@@ -2,18 +2,18 @@ import { AppExceptions } from '@/utils/AppExceptions';
 import slugify from 'slugify';
 
 export type CheckSlug = {
-  title: string;
+  url: string;
   accountId: string;
   repository: any;
 };
 
 export const checkSlug = async ({
-  title,
+  url,
   accountId,
   repository,
 }: CheckSlug): Promise<string> => {
-  if (!title) throw AppExceptions.SlugInvalid;
-  const slug = slugify(title.toLowerCase());
+  if (!url) throw AppExceptions.SlugInvalid;
+  const slug = slugify(url.toLowerCase());
   const isExists = await repository.findOne({
     slug,
     accountId,
