@@ -36,13 +36,12 @@ export class CourseLessonResolver {
   ) { }
 
   @UseGuards(AuthGuard)
-  @Mutation(() => Lesson)
+  @Mutation(() => Lesson, { name: 'createCourseLesson' })
   async createCourseLesson(
     @Args('input') input: CourseLessonInput,
-    @Args('accountId') accountId: string,
     @Context('user') user: User,
   ) {
-    const { id: userId } = user;
+    const { id: userId, accountId } = user;
     return this.courseLessonService.create({
       accountId,
       userId,
@@ -57,8 +56,10 @@ export class CourseLessonResolver {
     @Args('moduleId') moduleId: string,
     @Args({ name: 'baseId', type: () => String, nullable: true })
     baseId: string,
-    @Args({ name: 'limit', nullable: true, type: () => Int }) limit: number,
-    @Args({ name: 'offset', nullable: true, type: () => Int }) offset: number,
+    @Args({ name: 'limit', nullable: true, type: () => Int, defaultValue: 10 })
+    limit: number,
+    @Args({ name: 'offset', nullable: true, type: () => Int, defaultValue: 0 })
+    offset: number,
   ) {
     const { lessons } = await this.courseLessonService.findAll({
       accountId,
@@ -67,7 +68,6 @@ export class CourseLessonResolver {
       limit,
       offset,
     });
-
     return lessons;
   }
 
@@ -92,56 +92,49 @@ export class CourseLessonResolver {
     @Context('user') user: User,
   ) {
     const { id: userId } = user;
-    const lesson = await this.courseLessonService.findOneByEnrollment({
+    return await this.courseLessonService.findOneByEnrollment({
       accountId,
       userId,
       courseId,
       courseVersionId,
       lessonId,
     });
-    return lesson;
   }
 
   @UseGuards(AuthGuard)
   @Mutation(() => Lesson)
   async createOrUpdateLastCourseLessonAccess(
-    @Args('accountId') accountId: string,
     @Args('courseId') courseId: string,
     @Args('courseVersionId') courseVersionId: string,
     @Args('lessonId') lessonId: string,
     @Context('user') user: User,
   ) {
-    const { id: userId } = user;
-    const lesson = await this.courseLessonService.createOrUpdateLastCourseLessonAccess(
-      {
-        accountId,
-        userId,
-        courseId,
-        courseVersionId,
-        lessonId,
-      },
-    );
-    return lesson;
+    const { id: userId, accountId } = user;
+    return await this.courseLessonService.createOrUpdateLastCourseLessonAccess({
+      accountId,
+      userId,
+      courseId,
+      courseVersionId,
+      lessonId,
+    });
   }
 
   @UseGuards(AuthGuard)
   @Mutation(() => Lesson)
   async markLessonAsSeen(
-    @Args('accountId') accountId: string,
     @Args('courseId') courseId: string,
     @Args('lessonId') lessonId: string,
     @Args('isCompleted') isCompleted: boolean,
     @Context('user') user: User,
   ) {
-    const { id: userId } = user;
-    const lesson = await this.courseLessonService.markAsSeen({
+    const { id: userId, accountId } = user;
+    return await this.courseLessonService.markAsSeen({
       accountId,
       userId,
       courseId,
       lessonId,
       isCompleted,
     });
-    return lesson;
   }
 
   @UseGuards(AuthGuard)
