@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Brackets, MoreThan, Repository } from 'typeorm';
+import slugify from 'slugify';
 import { AppExceptions } from '../../utils/AppExceptions';
 
 import { UserRole } from '../users/user-role.entity';
@@ -23,6 +24,7 @@ import {
   MarkLessonAsSeenArgs,
   UpdateArgs,
 } from './types';
+import { checkSlug } from '@/utils';
 
 @Injectable()
 export class CourseLessonService {
@@ -51,25 +53,23 @@ export class CourseLessonService {
     sortOrder,
   }: CreateCourseLessonArgs): Promise<CourseLesson> {
     const userRole = await this.userRoleRepository.findOne({
-      where: {
-        userId,
-        accountId,
-      },
+      userId,
+      accountId,
     });
+    if (userRole.role !== 'owner') throw AppExceptions.AccessDenied;
 
-    if (userRole.role !== 'owner') {
-      throw AppExceptions.AccessDenied;
-    }
+    const slug = await checkSlug({
+      url: title,
+      accountId,
+      repository: this.courseLessonRepository,
+    });
 
     const courseModule = await this.courseModuleRepository.findOne({
       id: moduleId,
       accountId,
       courseVersionId,
     });
-
-    if (!courseModule) {
-      throw AppExceptions.CourseModuleNotFound;
-    }
+    if (!courseModule) throw AppExceptions.CourseModuleNotFound;
 
     if (courseModule.baseModuleId) {
       await this.copyModuleLessons({
@@ -77,9 +77,7 @@ export class CourseLessonService {
         moduleId,
         baseModuleId: courseModule.baseModuleId,
       });
-
       courseModule.baseModuleId = null;
-
       await this.courseModuleRepository.save(courseModule);
     }
 
@@ -90,12 +88,10 @@ export class CourseLessonService {
       courseVersionId,
       title,
       sortOrder,
+      slug,
       status: 'draft',
     });
-
-    const lesson = await this.courseLessonRepository.save(createdLesson);
-
-    return lesson;
+    return await this.courseLessonRepository.save(createdLesson);
   }
 
   private async copyModuleLessons({
@@ -176,18 +172,12 @@ export class CourseLessonService {
 
   async findOne({ accountId, lessonId }: FindOneLessonArgs) {
     const lesson = await this.courseLessonRepository.findOne({
-      where: {
-        id: lessonId,
-        accountId,
-      },
+      id: lessonId,
+      accountId,
     });
-
-    if (!lesson) {
-      throw AppExceptions.LessonNotFound;
-    }
+    if (!lesson) throw AppExceptions.LessonNotFound;
 
     const blocks = lesson.blocks ? JSON.stringify(lesson.blocks) : null;
-
     return {
       ...lesson,
       blocks,
@@ -554,37 +544,35 @@ export class CourseLessonService {
     userId,
     lessonId,
     blocks,
+    slug,
     ...input
   }: UpdateArgs): Promise<CourseLesson> {
     const userRole = await this.userRoleRepository.findOne({
-      where: {
-        userId,
-        accountId,
-      },
+      userId,
+      accountId,
     });
-
-    if (userRole.role !== 'owner') {
-      throw AppExceptions.AccessDenied;
-    }
+    if (userRole.role !== 'owner') throw AppExceptions.AccessDenied;
 
     const lesson = await this.courseLessonRepository.findOne({
-      where: {
-        id: lessonId,
-        accountId,
-      },
+      id: lessonId,
+      accountId,
     });
-
-    if (!lesson) {
-      throw AppExceptions.LessonNotFound;
-    }
+    if (!lesson) throw AppExceptions.LessonNotFound;
 
     if (blocks) lesson.blocks = JSON.parse(blocks);
+    if (slug) {
+      const updateSlug = await checkSlug({
+        url: slug,
+        accountId,
+        repository: this.courseLessonRepository,
+      });
+      Object.assign(lesson, { ...input, slug: updateSlug });
+    }
 
     Object.assign(lesson, {
       ...input,
       blocks: lesson.blocks,
     });
-
     return this.courseLessonRepository.save(lesson);
   }
 

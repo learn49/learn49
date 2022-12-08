@@ -1,4 +1,4 @@
-const toCamel = s => {
+const toCamel = (s: string) => {
   return s.toLowerCase().replace(/([-_][a-z])/gi, $1 => {
     return $1
       .toUpperCase()
@@ -7,12 +7,11 @@ const toCamel = s => {
   });
 };
 
-const toSnake = s => {
-  return s
+const toSnake = (s: string) =>
+  s
     .split(/(?=[A-Z])/)
     .join('_')
     .toLowerCase();
-};
 
 const keysToCamel = obj => {
   const keys = Object.keys(obj);

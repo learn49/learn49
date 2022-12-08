@@ -14,14 +14,11 @@ export class CustomCourseRepository implements ICourseRepository {
   constructor(
     @InjectRepository(Course)
     private readonly ormRepository: Repository<Course>,
-  ) {}
+  ) { }
 
   async create(args: CreateCourseArgs): Promise<Course> {
     const createdCourse = this.ormRepository.create(args);
-
-    const course = await this.ormRepository.save(createdCourse);
-
-    return course;
+    return await this.ormRepository.save(createdCourse);
   }
 
   async findOne({
@@ -42,9 +39,7 @@ export class CustomCourseRepository implements ICourseRepository {
       });
     }
 
-    const course = await query.getOne();
-
-    return course;
+    return await query.getOne();
   }
 
   async findAll({
@@ -53,40 +48,26 @@ export class CustomCourseRepository implements ICourseRepository {
     limit,
   }: FindAllCourseArgs): Promise<Course[]> {
     let query = this.ormRepository.createQueryBuilder('courses');
-
     if (accountId) {
       query = query.andWhere('courses.account_id = :accountId', {
         accountId,
       });
     }
-
-    if (limit) {
-      query = query.take(limit);
-    }
-
-    if (offset) {
-      query = query.offset(offset);
-    }
-
-    const courses = await query.getMany();
-
-    return courses;
+    if (limit) query = query.take(limit);
+    if (offset) query = query.offset(offset);
+    return await query.getMany();
   }
 
   async count(accountId: string): Promise<number> {
-    const totalCount = await this.ormRepository.count({
+    return await this.ormRepository.count({
       where: {
         accountId,
       },
     });
-
-    return totalCount;
   }
 
   async save(args: Course): Promise<Course> {
-    const course = await this.ormRepository.save(args);
-
-    return course;
+    return await this.ormRepository.save(args);
   }
 
   async remove(args: Course): Promise<void> {

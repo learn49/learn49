@@ -37,6 +37,15 @@ export class Lesson {
   status: string;
 
   @Field({ nullable: true })
+  slug: string;
+
+  @Field({ nullable: true })
+  description: string;
+
+  @Field({ nullable: true })
+  duration: string;
+
+  @Field({ nullable: true })
   nextLesson: string;
 
   @Field(() => GraphQLISODateTime, { nullable: true })

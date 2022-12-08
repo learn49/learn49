@@ -36,17 +36,14 @@ export class CourseModuleResolver {
   @Mutation(() => CourseModule, { name: 'createCourseModule' })
   async createCourseModule(
     @Args('input') input: CourseModuleInput,
-    @Args('accountId') accountId: string,
     @Context('user') user: User,
   ) {
-    const { id: userId } = user;
-    const module = await this.courseModuleService.create({
+    const { id: userId, accountId } = user;
+    return await this.courseModuleService.create({
       accountId,
       userId,
       ...input,
     });
-
-    return module;
   }
 
   @Query(() => [CourseModule], { name: 'getCourseModules' })

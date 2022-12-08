@@ -21,6 +21,12 @@ export class Course {
   @Field({ nullable: true })
   defaultVersion: string;
 
+  @Field({ nullable: true })
+  slug: string;
+
+  @Field({ nullable: true })
+  duration: string;
+
   @Field(() => ID, { nullable: true })
   courseVersionId: string;
 
