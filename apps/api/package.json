@@ -26,7 +26,8 @@
     "test:test": "ts-node __tests__/seed/admin.ts && NODE_ENV=test jest -i  --forceExit --detectOpenHandles --verbose --config ./__tests__/jest.config.js",
     "migration:new": "typeorm migration:create -n",
     "typeorm:cli": "ts-node ./node_modules/typeorm/cli -f ./ormconfig.ts",
-    "migration:run": "npm run typeorm:cli -- migration:run"
+    "migration:run": "npm run typeorm:cli -- migration:run",
+    "seed:run": "node src/seeds/initial.js"
   },
   "dependencies": {
     "@anchan828/nest-sendgrid": "^0.1.39",
