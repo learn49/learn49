@@ -34,10 +34,9 @@ export class CourseResolver {
   @Mutation(() => Course, { name: 'createCourse' })
   async createCourse(
     @Args('input') input: CourseInput,
-    @Args('accountId') accountId: string,
     @Context('user') user: User,
   ) {
-    const { id: userId } = user;
+    const { id: userId, accountId } = user;
     const course = await this.courseService.create({
       accountId,
       userId,
@@ -51,10 +50,9 @@ export class CourseResolver {
   @Mutation(() => Course, { name: 'updateCourse' })
   async updateCourse(
     @Args('input') input: UpdateCourseInput,
-    @Args('accountId') accountId: string,
     @Context('user') user: User,
   ) {
-    const { id: userId } = user;
+    const { id: userId, accountId } = user;
     return this.courseService.update({
       accountId,
       userId,
@@ -65,11 +63,10 @@ export class CourseResolver {
   @UseGuards(AuthGuard)
   @Mutation(() => Course, { name: 'deleteCourse' })
   async deleteCourse(
-    @Args('accountId') accountId: string,
     @Args('courseId') courseId: string,
     @Context('user') user: User,
   ) {
-    const { id: userId } = user;
+    const { id: userId, accountId } = user;
     return this.courseService.destroy({
       accountId,
       courseId,
@@ -77,12 +74,11 @@ export class CourseResolver {
     });
   }
 
-  //@UseGuards(AuthGuard)
   @Query(() => [Course], { name: 'getCourses' })
   async getCourses(
     @Args('accountId') accountId: string,
-    @Args('limit') limit: number,
-    @Args('offset') offset: number,
+    @Args('limit', { defaultValue: 10 }) limit: number,
+    @Args('offset', { defaultValue: 0 }) offset: number,
     @Context('user') user: User,
   ) {
     const userId = user?.id;

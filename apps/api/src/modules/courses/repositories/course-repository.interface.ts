@@ -15,10 +15,12 @@ export interface CreateCourseArgs {
   createdAt: Date;
   updatedAt: Date;
   labels: Label[];
+  slug: string;
 }
 
 export interface FindOneCourseArgs {
   id?: string;
+  slug?: string;
   accountId?: string;
 }
 

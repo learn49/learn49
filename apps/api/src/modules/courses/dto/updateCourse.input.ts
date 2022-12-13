@@ -21,6 +21,12 @@ export class UpdateCourseInput {
   @Field({ nullable: true })
   videoPreview: string;
 
+  @Field({ nullable: true })
+  slug: string;
+
+  @Field({ nullable: true })
+  duration: string;
+
   @Field(() => [UpdateLabelInput], { nullable: true })
   labels: UpdateLabelInput[];
 }

@@ -33,7 +33,8 @@ type AppExceptionType =
   | 'CourseVersionNotFound'
   | 'UserRoleNotFound'
   | 'MediaFileNotFound'
-  | 'CourseLessonNotFound';
+  | 'CourseLessonNotFound'
+  | 'SlugInvalid';
 
 export class AppException extends HttpException {
   constructor(message: string, status: HttpStatus = HttpStatus.BAD_REQUEST) {
@@ -77,4 +78,5 @@ export const AppExceptions: Record<AppExceptionType, AppException> = {
   UserRoleNotFound: new AppException('User role not found'),
   MediaFileNotFound: new AppException('Media file not found'),
   CourseLessonNotFound: new AppException('Course lesson not found'),
+  SlugInvalid: new AppException('Slug existent or invalid'),
 };

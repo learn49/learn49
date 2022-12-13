@@ -47,6 +47,15 @@ export class CourseLesson {
   @Column({ default: 'draft' })
   status: string;
 
+  @Column({ nullable: true })
+  slug: string;
+
+  @Column({ nullable: true })
+  description: string;
+
+  @Column({ nullable: true })
+  duration: string;
+
   @Column({ name: 'release_on_date', nullable: true })
   releaseOnDate: Date;
 

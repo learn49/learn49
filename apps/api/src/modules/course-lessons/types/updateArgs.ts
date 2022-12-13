@@ -7,4 +7,7 @@ export type UpdateArgs = {
   releaseOnDate?: Date;
   status?: string;
   releaseAfter?: number;
+  slug?: string;
+  description?: string;
+  duration?: string;
 };

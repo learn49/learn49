@@ -16,4 +16,13 @@ export class EditLessonInput {
 
   @Field(() => Int, { nullable: true })
   releaseAfter: number;
+
+  @Field({ nullable: true })
+  slug: string;
+
+  @Field({ nullable: true })
+  description: string;
+
+  @Field({ nullable: true })
+  duration: string;
 }

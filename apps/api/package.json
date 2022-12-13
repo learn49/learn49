@@ -1,12 +1,9 @@
 {
   "name": "learn49-api",
-  "version": "1.0.1",
+  "version": "2.0.1",
   "description": "",
   "author": "ID49",
   "license": "MIT",
-  "engines": {
-    "node": "14.x"
-  },
   "scripts": {
     "postinstall": "nest build",
     "prebuild": "rimraf dist",
@@ -64,7 +61,8 @@
     "sharp": "^0.30.1",
     "type-graphql": "^0.17.6",
     "typeorm": "^0.2.43",
-    "uuid": "^3.4.0"
+    "uuid": "^3.4.0",
+    "slugify": "^1.6.5"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.2.1",

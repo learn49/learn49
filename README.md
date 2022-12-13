@@ -20,19 +20,24 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 ## Starting locally:
 
 ```sh
-docker-compose up proxy
+docker-compose up postgres
 ```
 
 ## Getting started
 
-This is a Turborepo powered monorepo. It relies on NPM workspaces to link dependencies.
+This is a Turborepo powered monorepo. It relies on PNPM workspaces to link dependencies.
+
+You can install PNPM from: https://pnpm.io/installation
 
 On the root directory:
 
 ```
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
+
+- API: http://localhost:3333/graphql
+- UI: http://localhost:3000/graphql
 
 # Commitzen
 
