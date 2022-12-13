@@ -1,3 +1,4 @@
+import { JSONObject } from '@/utils/type-utils';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -59,7 +60,10 @@ export class CourseLesson {
   updatedAt: Date;
 
   @Column({ type: 'jsonb', nullable: true })
-  metadata: any;
+  metadata: JSONObject;
+
+  @Column({ type: 'jsonb', nullable: true })
+  customFields: JSONObject;
 
   // @ManyToOne(
   //   () => Courses,

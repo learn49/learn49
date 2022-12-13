@@ -1,3 +1,4 @@
+import { JSONObject } from '@/utils/type-utils';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -55,7 +56,10 @@ export class Course {
   labels: Label[];
 
   @Column({ type: 'jsonb', nullable: true })
-  metadata: any;
+  metadata: JSONObject;
+
+  @Column({ type: 'jsonb', nullable: true })
+  customFields: JSONObject;
 
   @BeforeInsert()
   generateId() {

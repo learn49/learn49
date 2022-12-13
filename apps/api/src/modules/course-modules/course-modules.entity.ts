@@ -1,3 +1,4 @@
+import { JSONObject } from '@/utils/type-utils';
 import {
   Entity,
   Column,
@@ -38,7 +39,10 @@ export class CourseModule {
   updatedAt: Date;
 
   @Column({ type: 'jsonb', nullable: true })
-  metadata: any;
+  metadata: JSONObject;
+
+  @Column({ type: 'jsonb', nullable: true })
+  customFields: JSONObject;
 
   @BeforeInsert()
   generateGuid() {
