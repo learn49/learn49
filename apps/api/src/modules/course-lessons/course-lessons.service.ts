@@ -232,7 +232,9 @@ export class CourseLessonService {
           .andWhere(`enrollment.user_id = '${userId}'`)
           .andWhere(`enrollment.account_id = '${accountId}'`)
           .andWhere(`enrollment.status = 'active'`)
-          .andWhere(`enrollment.end_date > CURRENT_TIMESTAMP`)
+          .andWhere(
+            `(enrollment.end_date > CURRENT_TIMESTAMP OR enrollment.end_date IS NULL)`,
+          )
           .getOne();
       }
 
