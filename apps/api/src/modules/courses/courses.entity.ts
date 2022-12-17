@@ -64,7 +64,7 @@ export class Course {
   @Column({ type: 'jsonb', nullable: true })
   metadata: JSONObject;
 
-  @Column({ type: 'jsonb', nullable: true })
+  @Column({ type: 'jsonb', nullable: true, name: 'custom_fields' })
   customFields: JSONObject;
 
   @BeforeInsert()
