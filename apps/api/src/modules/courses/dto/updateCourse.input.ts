@@ -29,4 +29,13 @@ export class UpdateCourseInput {
 
   @Field(() => [UpdateLabelInput], { nullable: true })
   labels: UpdateLabelInput[];
+
+  @Field(() => [String], { nullable: true })
+  relatedCourses: string[];
+
+  @Field(() => [String], { nullable: true })
+  nextUpCourses: string[];
+
+  @Field(() => [String], { nullable: true })
+  requiredCourses: string[];
 }

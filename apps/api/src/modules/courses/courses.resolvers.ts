@@ -28,7 +28,7 @@ export class CourseResolver {
     private readonly courseService: CourseService,
     private readonly labelService: LabelService,
     private readonly customFieldExtension: CustomFieldExtension,
-  ) { }
+  ) {}
 
   @UseGuards(AuthGuard)
   @Mutation(() => Course, { name: 'createCourse' })
@@ -132,6 +132,45 @@ export class CourseResolver {
       installationId,
       extensionSlug,
       field,
+    });
+  }
+
+  @ResolveField(() => [Course], { nullable: true })
+  async relatedCourses(@Parent() course: Course) {
+    const { relatedCourses } = await this.courseService.findOne({
+      courseId: course.id,
+      accountId: course.accountId,
+    });
+
+    return this.courseService.findAllV2({
+      ids: relatedCourses,
+      accountId: course.accountId,
+    });
+  }
+
+  @ResolveField(() => [Course], { nullable: true })
+  async nextUpCourses(@Parent() course: Course) {
+    const { nextUpCourses } = await this.courseService.findOne({
+      courseId: course.id,
+      accountId: course.accountId,
+    });
+
+    return this.courseService.findAllV2({
+      ids: nextUpCourses,
+      accountId: course.accountId,
+    });
+  }
+
+  @ResolveField(() => [Course], { nullable: true })
+  async requiredCourses(@Parent() course: Course) {
+    const { requiredCourses } = await this.courseService.findOne({
+      courseId: course.id,
+      accountId: course.accountId,
+    });
+
+    return this.courseService.findAllV2({
+      ids: requiredCourses,
+      accountId: course.accountId,
     });
   }
 }

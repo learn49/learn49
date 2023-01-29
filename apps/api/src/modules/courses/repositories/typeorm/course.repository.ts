@@ -14,7 +14,7 @@ export class CustomCourseRepository implements ICourseRepository {
   constructor(
     @InjectRepository(Course)
     private readonly ormRepository: Repository<Course>,
-  ) { }
+  ) {}
 
   async create(args: CreateCourseArgs): Promise<Course> {
     const createdCourse = this.ormRepository.create(args);
@@ -43,11 +43,17 @@ export class CustomCourseRepository implements ICourseRepository {
   }
 
   async findAll({
+    ids,
     accountId,
     offset,
     limit,
   }: FindAllCourseArgs): Promise<Course[]> {
     let query = this.ormRepository.createQueryBuilder('courses');
+    if (ids) {
+      query = query.andWhere('courses.id IN(:...ids)', {
+        ids,
+      });
+    }
     if (accountId) {
       query = query.andWhere('courses.account_id = :accountId', {
         accountId,

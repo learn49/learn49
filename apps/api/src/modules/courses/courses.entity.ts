@@ -67,6 +67,18 @@ export class Course {
   @Column({ type: 'jsonb', nullable: true })
   customFields: JSONObject;
 
+  @Column({ nullable: true })
+  takeaway: string;
+
+  @Column({ name: 'related_courses', type: 'jsonb', nullable: true })
+  relatedCourses: string[];
+
+  @Column({ name: 'next_up_courses', type: 'jsonb', nullable: true })
+  nextUpCourses: string[];
+
+  @Column({ name: 'required_courses', type: 'jsonb', nullable: true })
+  requiredCourses: string[];
+
   @BeforeInsert()
   generateId() {
     this.id = uuid();
