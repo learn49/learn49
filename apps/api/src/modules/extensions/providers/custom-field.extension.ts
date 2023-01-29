@@ -73,7 +73,7 @@ export class CustomFieldExtension {
     private readonly userRepository: IUserRepository,
     @Inject('MEDIA_FILE_REPOSITORY')
     private readonly mediaFileRepository: IMediaFileRepository,
-  ) { }
+  ) {}
 
   async read({
     accountId,

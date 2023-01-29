@@ -25,6 +25,7 @@ export interface FindOneCourseArgs {
 }
 
 export interface FindAllCourseArgs {
+  ids?: string[];
   accountId?: string;
   offset?: number;
   limit?: number;

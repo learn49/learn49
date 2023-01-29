@@ -12,4 +12,7 @@ export type UpdateArgs = {
   labels: Label[];
   slug?: string;
   duration?: string;
+  relatedCourses?: string[];
+  nextUpCourses?: string[];
+  requiredCourses?: string[];
 };

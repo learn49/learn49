@@ -14,6 +14,7 @@ import {
   CourseArgs,
   DestroyArgs,
   FindAllArgs,
+  FindAllV2Args,
   FindOneArgs,
   ProgressArgs,
   UpdateArgs,
@@ -42,7 +43,7 @@ export class CourseService {
     private readonly lessonProxyRepository: Repository<LessonProxy>,
     @InjectRepository(LessonProgress)
     private readonly lessonProgressRepository: Repository<LessonProgress>,
-  ) { }
+  ) {}
 
   async create({
     userId,
@@ -85,13 +86,19 @@ export class CourseService {
   }
 
   async findOne({ accountId, courseId }: FindOneArgs) {
-    return await this.courseRepository.findOne({
+    const course = await this.courseRepository.findOne({
       id: courseId,
       accountId,
     });
+
+    if (!course) {
+      throw AppExceptions.CourseNotFound;
+    }
+
+    return course;
   }
 
-  async findAll({ accountId, userId, limit, offset }: FindAllArgs) {
+  async findAll({ ids, accountId, userId, limit, offset }: FindAllArgs) {
     const userRole = await this.userRoleRepository.findOne({
       where: {
         userId,
@@ -102,6 +109,7 @@ export class CourseService {
     // @todo:  considerar os outros papeis
     if (!userRole || userRole.role === 'owner') {
       const courses = await this.courseRepository.findAll({
+        ids,
         accountId,
         offset,
         limit,
@@ -221,6 +229,22 @@ export class CourseService {
     return { courses: parsedCourses };
   }
 
+  async findAllV2({
+    ids,
+    accountId,
+    limit,
+    offset,
+  }: FindAllV2Args): Promise<Course[]> {
+    const courses = await this.courseRepository.findAll({
+      ids,
+      accountId,
+      offset,
+      limit,
+    });
+
+    return courses;
+  }
+
   async update({
     userId,
     accountId,
@@ -233,6 +257,9 @@ export class CourseService {
     slug,
     duration,
     labels,
+    relatedCourses,
+    nextUpCourses,
+    requiredCourses,
   }: UpdateArgs) {
     const userRole = await this.userRoleRepository.findOne({
       userId,
@@ -254,6 +281,9 @@ export class CourseService {
     if (videoPreview) course.videoPreview = videoPreview;
     if (defaultVersion) course.defaultVersion = defaultVersion;
     if (duration) course.duration = duration;
+    if (relatedCourses) course.relatedCourses = relatedCourses;
+    if (nextUpCourses) course.nextUpCourses = nextUpCourses;
+    if (requiredCourses) course.requiredCourses = requiredCourses;
     if (slug) {
       course.slug = await checkSlug({
         url: slug,

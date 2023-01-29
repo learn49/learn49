@@ -1,5 +1,6 @@
 import { Field, ObjectType, ID } from '@nestjs/graphql';
 import { Label } from '@/modules/labels/dto/label';
+import { JSONObject } from '@/utils/type-utils';
 
 @ObjectType()
 export class Course {
@@ -46,4 +47,16 @@ export class Course {
 
   @Field(() => [Label], { nullable: true })
   labels: Label[];
+
+  @Field({ nullable: true })
+  takeaway: string;
+
+  @Field(() => [Course], { nullable: true })
+  relatedCourses: Course[];
+
+  @Field(() => [Course], { nullable: true })
+  nextUpCourses: Course[];
+
+  @Field(() => [Course], { nullable: true })
+  requiredCourses: Course[];
 }
